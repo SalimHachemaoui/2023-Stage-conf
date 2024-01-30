@@ -1,0 +1,926 @@
+{
+    "settings": {
+        "analysis": {
+            "filter": {
+                "synonym_filter": {
+                    "type": "synonym_graph",
+                    "synonyms_path": "analysis/fra_synonyms_solr_format.txt",
+                    "lenient": true
+                },
+                "french_elision": {
+                    "type": "elision",
+                    "articles_case": true,
+                    "articles": [
+                        "l",
+                        "m",
+                        "t",
+                        "qu",
+                        "n",
+                        "s",
+                        "j",
+                        "d",
+                        "c",
+                        "jusqu",
+                        "quoiqu",
+                        "lorsqu",
+                        "puisqu"
+                    ]
+                },
+                "french_stop": {
+                    "type": "stop",
+                    "stopwords": [
+                        "_french_",
+                        "cours",
+                        "cour"
+                    ]
+                },
+                "french_keywords": {
+                    "type": "keyword_marker",
+                    "keywords": []
+                },
+                "french_stemmer": {
+                    "type": "stemmer",
+                    "language": "light_french"
+                },
+                "syn_multiplexer": {
+                    "type": "multiplexer",
+                    "filters": [
+                        "french_elision, lowercase, synonym_filter, french_stop, french_stemmer",
+                        "french_elision, lowercase, french_stop, french_keywords ,french_stemmer"
+                    ],
+                    "preserve_original": false
+                }
+            },
+            "analyzer": {
+                "fr_tokenizer": {
+                    "tokenizer": "standard",
+                    "filter": [
+                        "french_elision",
+                        "lowercase",
+                        "french_stop",
+                        "french_keywords",
+                        "french_stemmer"
+                    ],
+                    "char_filter": [
+                        "html_strip"
+                    ]
+                },
+                "fr_search_tokenizer": {
+                    "tokenizer": "whitespace",
+                    "filter": [
+                        "syn_multiplexer"
+                    ]
+                }
+            }
+        }
+    },
+    "mappings": {
+        "dynamic": "strict",
+        "properties": {
+            "lom_1_10_generalresourcetype": {
+                "type": "text"
+            },
+            "lom_1_1_identifier": {
+                "properties": {
+                    "catalog": {
+                        "type": "text"
+                    },
+                    "entry": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_1_2_title": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "fields": {
+                            "completion": {
+                                "type": "completion",
+                                "analyzer": "simple",
+                                "preserve_separators": true,
+                                "preserve_position_increments": true,
+                                "max_input_length": 50
+                            },
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        },
+                        "analyzer": "fr_tokenizer"
+                    }
+                }
+            },
+            "lom_1_3_language": {
+                "type": "keyword"
+            },
+            "lom_1_4_description": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "analyzer": "fr_tokenizer"
+                    }
+                }
+            },
+            "lom_1_5_keyword": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "fields": {
+                            "completion": {
+                                "type": "completion",
+                                "analyzer": "simple",
+                                "preserve_separators": true,
+                                "preserve_position_increments": true,
+                                "max_input_length": 50
+                            },
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_1_6_coverage": {
+                "properties": {
+                    "coverage": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_1_7_structure": {
+                "properties": {
+                    "source": {
+                        "type": "text"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "lom_1_8_aggregationlevel": {
+                "properties": {
+                    "source": {
+                        "type": "text"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "lom_1_9_documenttype": {
+                "properties": {
+                    "label": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "source": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "value": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_2_1_version": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_2_2_status": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "text"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "lom_2_3_contribute": {
+                "properties": {
+                    "dateTime": {
+                        "type": "keyword"
+                    },
+                    "description": {
+                        "properties": {
+                            "lang": {
+                                "type": "keyword"
+                            },
+                            "text": {
+                                "type": "text",
+                                "analyzer": "fr_tokenizer"
+                            }
+                        }
+                    },
+                    "entity": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "entityName": {
+                        "type": "text",
+                        "fields": {
+                            "completion": {
+                                "type": "completion",
+                                "analyzer": "simple",
+                                "preserve_separators": true,
+                                "preserve_position_increments": true,
+                                "max_input_length": 50
+                            },
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "label": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "source": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "value": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_2_4_contribute_author":{
+                "properties":{
+                    "entity": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "entityName": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            },
+                            "completion": {
+                                "type": "completion"
+                            }
+                        }
+                    },
+                    "label": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "source": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "value": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "dateTime": {
+                        "type": "keyword"
+                    },
+                    "description": {
+                        "properties": {
+                            "lang": {
+                                "type": "keyword"
+                            },
+                            "text": {
+                                "type": "text",
+                                "analyzer": "fr_tokenizer"
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_2_5_contribute_editor":{
+                "properties":{
+                    "entity": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "entityName": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            },
+                            "completion": {
+                                "type": "completion"
+                            }
+                        }
+                    },
+                    "label": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "source": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "value": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "dateTime": {
+                        "type": "keyword"
+                    },
+                    "description": {
+                        "properties": {
+                            "lang": {
+                                "type": "keyword"
+                            },
+                            "text": {
+                                "type": "text",
+                                "analyzer": "fr_tokenizer"
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_3_1_identifier": {
+                "properties": {
+                    "catalog": {
+                        "type": "text"
+                    },
+                    "entry": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_3_2_contribute": {
+                "properties": {
+                    "date": {
+                        "type": "text"
+                    },
+                    "dateTime": {
+                        "type": "keyword"
+                    },
+                    "description": {
+                        "type": "text",
+                        "analyzer": "fr_tokenizer"
+                    },
+                    "entity": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "entityName": {
+                        "type": "text",
+                        "fields": {
+                            "completion": {
+                                "type": "completion",
+                                "analyzer": "simple",
+                                "preserve_separators": true,
+                                "preserve_position_increments": true,
+                                "max_input_length": 50
+                            },
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "role": {
+                        "type": "text"
+                    },
+                    "source": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    },
+                    "value": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_3_3_metadataschema": {
+                "type": "text"
+            },
+            "lom_3_4_language": {
+                "type": "text"
+            },
+            "lom_4_1_format": {
+                "type": "text"
+            },
+            "lom_4_2_size": {
+                "type": "text"
+            },
+            "lom_4_3_location": {
+                "type": "text"
+            },
+            "lom_4_4_requirement": {
+                "properties": {
+                    "orComposite": {
+                        "properties": {
+                            "name": {
+                                "properties": {
+                                    "label": {
+                                        "type": "keyword"
+                                    },
+                                    "source": {
+                                        "type": "text"
+                                    },
+                                    "value": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            },
+                            "type": {
+                                "properties": {
+                                    "label": {
+                                        "type": "keyword"
+                                    },
+                                    "source": {
+                                        "type": "text"
+                                    },
+                                    "value": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_4_5_installationremarks": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_4_6_otherplatformrequirements": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_4_7_duration": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "lom_5_10_description": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_11_language": {
+                "type": "text"
+            },
+            "lom_5_12_activity": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_13_credit": {
+                "properties": {
+                    "string": {
+                        "properties": {
+                            "#text": {
+                                "type": "text"
+                            },
+                            "@language": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_5_14_place": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_15_educationalmethod": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_16_tool": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_1_activitetype": {
+                "type": "object"
+            },
+            "lom_5_2_learningresourcetype": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_3_interactivitelevel": {
+                "type": "keyword"
+            },
+            "lom_5_4_semanticdensity": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "lom_5_5_intendedenduserrole": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_6_context": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_7_typicalagerange": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_8_difficulty": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text"
+                    }
+                }
+            },
+            "lom_5_9_typicallearningtime": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "lom_6_1_cost": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_6_2_copyrightandotherrestrictions": {
+                "properties": {
+                    "label": {
+                        "type": "keyword"
+                    },
+                    "source": {
+                        "type": "keyword"
+                    },
+                    "value": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "lom_6_3_description": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        },
+                        "analyzer": "fr_tokenizer"
+                    }
+                }
+            },
+            "lom_7_relation": {
+                "properties": {
+                    "kind": {
+                        "properties": {
+                            "label": {
+                                "type": "keyword"
+                            },
+                            "source": {
+                                "type": "keyword"
+                            },
+                            "value": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "resource": {
+                        "properties": {
+                            "description": {
+                                "properties": {
+                                    "lang": {
+                                        "type": "keyword"
+                                    },
+                                    "text": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "identifier": {
+                                "properties": {
+                                    "catalog": {
+                                        "type": "text"
+                                    },
+                                    "entry": {
+                                        "type": "text"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "lom_9_classification": {
+                "properties": {
+                    "description": {
+                        "properties": {
+                            "lang": {
+                                "type": "keyword"
+                            },
+                            "text": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "keyword": {
+                        "properties": {
+                            "lang": {
+                                "type": "keyword"
+                            },
+                            "text": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "purpose": {
+                        "properties": {
+                            "source": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "ignore_above": 256
+                                    }
+                                }
+                            },
+                            "value": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "ignore_above": 256
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "taxonPath": {
+                        "properties": {
+                            "source": {
+                                "properties": {
+                                    "lang": {
+                                        "type": "keyword"
+                                    },
+                                    "text": {
+                                        "type": "text"
+                                    }
+                                }
+                            },
+                            "taxon": {
+                                "properties": {
+                                    "entry": {
+                                        "properties": {
+                                            "lang": {
+                                                "type": "keyword"
+                                            },
+                                            "text": {
+                                                "type": "text"
+                                            }
+                                        }
+                                    },
+                                    "id": {
+                                        "type": "keyword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "parene_resource_id": {
+                "type": "long"
+            },
+            "parene_resource_lom_id": {
+                "type": "long"
+            }
+        }
+    }
+}

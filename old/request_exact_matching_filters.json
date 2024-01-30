@@ -1,0 +1,69 @@
+{
+    "script": {
+        "lang": "mustache",
+        "source":  "{
+            \"query\": {
+                \"bool\": {
+                    \"filter\": [
+                        {{#country}}
+                        {
+                            
+                            \"term\": {
+                                \"cdm_cours_22_1_4_country\": \"{{country}}\"
+                            }
+                        },
+                        {{/country}}
+                        {{#city}}                            
+                        {
+                            \"term\": {
+                                \"cdm_cours_22_1_3_city\": \"{{city}}\"
+                            }
+                        },{{#city}}
+                        {{#level}}
+                        {
+                            \"term\": {
+                                \"cdm_cours_6_2_level\": \"{{level}}\"
+                            }
+                        },{{/level}}
+                        {{#instruction_language}}
+                        {
+                            \"term\": {
+                                \"cdm_cours_16_instructionlanguage\": \"{{instruction_language}}\"
+                            }
+                        },{{/instruction_language}}
+                        {{#online}}
+                        {
+                            \"term\": {
+                                \"cdm_cours_12_2_teachingonline\": \"{{online}}\"
+                            }
+                        },{{/online}}
+                        {{#teaching_place}}
+                        {
+                            \"term\": {
+                                \"cdm_cours_12_1_3_teachingplacebuilding\": \"{{teaching_place}}\"
+                            }
+                        },{{/teaching_place}}
+                        {
+                            \"range\": {
+                                \"pr_sale_price\": {
+                                    \"gte\": \"{{#min_price}}{{min_price}}{{/min_price}}{{^min_price}}0{{min_price}}\",
+                                    \"lte\": \"{{#max_price}}{{max_price}}{{/max_price}}{{^max_price}}0{{max_price}}\"
+                                }
+                            }
+                        }
+                    ],
+                    \"must\": {
+                        \"match\": {
+                            \"cdm_cours_5_description\": {
+                                \"query\": \"{{query_string}}\",
+                                \"fuzziness\": \"AUTO\"
+                            }
+                        }
+                    }
+                }
+            }
+        }"  ,
+        "from": "{{min}}",
+        "size": "{{size}}"
+    }
+}

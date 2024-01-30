@@ -1,0 +1,94 @@
+{
+    "script": {
+        "lang": "mustache",
+        "source": """
+        {
+            "query": {
+                "bool": {
+                    "should": [
+                        {{#country}}
+                        {"term":{"cdm_cours_6_1_countryname":"{{country}}"}},
+                        {{/country}}
+                        {{#city}}
+                        {"term":{"cdm_cours_22_1_3_city":"{{city}}"}},
+                        {{/city}}
+                        {{#level}}
+                        {"term":{"cdm_cours_6_2_level.text":"{{level}}"}},
+                        {{/level}}
+                        {{#language}}
+                        {"term":{"cdm_cours_16_instructionlanguage":"{{language}}"}},
+                        {{/language}}
+                        {{#provider}}
+                        {"term":{"cdm_cours_29_2_nameprovider":"{{provider}}"}},
+                        {{/provider}}
+                        {{#online}}
+                        {"term":{"cdm_cours_12_2_teachingonline":"{{online}}"}},
+                        {{/online}}
+                        {{#teaching_place}}
+                        {"term":{"cdm_cours_12_1_3_teachingplacebuilding":"{{teaching_place}}"}},
+                        {{/teaching_place}}
+                        {"range": {
+                            "pr_sale_price":{
+                                "gte":"{{min_price}}{{^min_price}}0{{/min_price}}",
+                                "lte":"{{max_price}}{{^max_price}}1000{{/max_price}}"
+                        }}}
+                    ],
+                    "must": [
+                        {{#query_string}}
+                        {"multi_match":{
+                            "query":"{{query_string}}",
+                            "analyzer": "fr_search_tokenizer",
+                            "type": "most_fields",
+                            "fuzziness": "AUTO",
+                            "minimum_should_match": "90%",
+                            "operator": "AND",
+                            //"lenient": true,
+                            "fields": [
+                                "cdm_cours_2_title.text^2",
+                                "cdm_cours_26_searchword.text^4",
+                                "cdm_cours_4_resume.text",
+                                "cdm_cours_5_description.text^0.6",
+                                "cdm_cours_18_syllabus.text",
+                                "cdm_cours_9_learningobjectives.text"
+                            ]
+                        }},{{/query_string}}
+                        {{#title}}
+                        {"match":{"cdm_cours_2_title.text":"{{title}}"}},
+                        {{/title}}
+                        {{#resume}}
+                        {"match":{"cdm_cours_4_resume.text":"{{resume}}"}},
+                        {{/resume}}
+                        {{#searchword}}
+                        {"match":{"cdm_cours_26_searchword.text":"{{searchword}}"}},
+                        {{/searchword}}
+                        {{#description}}
+                        {"match":{"cdm_cours_5_description.text":"{{description}}"}},
+                        {{/description}}
+                        {"match_all": {}}
+                    ],
+                    "minimum_should_match" : "{{minimum_should_match}}{{^minimum_should_match}}100{{/minimum_should_match}}%"
+                }},
+            {{#sort_field}}
+            "sort": [
+                {"{{sort_field}}": {"order": "{{order}}{{^order}}asc{{/order}}"}}
+            ],
+            {{/sort_field}}
+            "from": "{{min}}{{^min}}0{{/min}}"
+            {{^aggregate_field}},
+            "size": "{{size}}{{^size}}5{{/size}}"
+            {{/aggregate_field}}
+            {{#aggregate_field}},
+            "_source":  ["{{aggregate_field}}"],
+            "size": 0,
+            "aggs": {
+              "values": {
+                "terms" : {
+                  "field": "{{aggregate_field}}"
+                }   
+              }
+            }
+            {{/aggregate_field}}
+
+        }"""        
+    }
+}

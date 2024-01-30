@@ -1,0 +1,15 @@
+{
+    "id": "all-filters-template",
+    "params": {
+        "instruction_language": "français",
+        "online": "",
+        "teaching_place": "",
+        "min_price": 0,
+        "max_price": 500,
+        "query_string": "",
+        "title": "livre informatique",
+        "size": 100,
+        "sort_field": "cdm_cours_2_title.text"
+    }
+}
+  

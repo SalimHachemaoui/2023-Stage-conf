@@ -1,0 +1,17 @@
+{
+    "id": "all-filters-template",
+    "params": {
+      "title": "esfsefsef",
+      "country": "",
+      "city": "",
+      "level": "",
+      "instruction_language": "",
+      "online": "",
+      "teaching_place": "",
+      "min_price": 0,
+      "max_price": 500,
+      "query_string": "",
+      "min": 0,
+      "size": 100
+    }
+  }

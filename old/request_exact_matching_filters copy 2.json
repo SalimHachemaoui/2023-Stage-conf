@@ -1,0 +1,18 @@
+{
+    "script": {
+        "lang": "mustache",
+        "source": {
+            "query": {
+                "bool": {
+                    "must": {
+                        "match": {
+                            "cdm_cours_5_description": {
+                                "query": "{{query_string}}"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

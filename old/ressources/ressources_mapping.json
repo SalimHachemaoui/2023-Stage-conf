@@ -1,0 +1,278 @@
+{
+    "_index": "ressource_index",
+    "_id": "%{parene_ressource_lom_id}",
+    "_version": 5000,
+    "_score": 0,
+    "_source": {
+      "lom_5_5_intendedenduserrole": null,
+      "lom_5_9_typicallearningtime": null,
+      "lom_1_5_keyword": null,
+      "lom_3_2_contribute": null,
+      "lom_5_7_typicalagerange": null,
+      "lom_7_relation": "[{\"kind\": {\"label\": \"a pour vignette\", \"value\": \"a pour vignette\", \"source\": \"SCOLOMFRv2.1\"}, \"resource\": {\"identifier\": [{\"entry\": \"http://gallica.bnf.fr/ark:/12148/bpt6k28177376/medres.jpg\", \"catalog\": \"URI\"}]}}]",
+      "pr_source": "gallica",
+      "lom_4_4_requirement": null,
+      "lom_5_12_activity": null,
+      "lom_5_14_place": null,
+      "lom_8_annotation": null,
+      "lom_1_6_coverage": null,
+      "lom_4_1_format": null,
+      "pr_resource_author": "",
+      "lom_5_10_description": null,
+      "lom_1_9_documenttype": [
+        {
+          "label": "texte",
+          "source": "oai_dc",
+          "value": "Texte"
+        },
+        {
+          "label": "text",
+          "source": "oai_dc",
+          "value": "Texte"
+        },
+        {
+          "label": "publication en série imprimée",
+          "source": "oai_dc",
+          "value": "Texte"
+        },
+        {
+          "label": "printed serial",
+          "source": "oai_dc",
+          "value": "Texte"
+        }
+      ],
+      "lom_2_1_version": null,
+      "pr_resource_language": "fra",
+      "pr_resource_level": null,
+      "pr_resource_type": "Texte",
+      "lom_1_10_generalresourcetype": null,
+      "lom_4_5_installationremarks": null,
+      "lom_5_15_educationalmethod": null,
+      "lom_5_3_interactivitelevel": null,
+      "lom_3_3_metadataschema": null,
+      "lom_5_4_semanticdensity": null,
+      "pr_resource_title_text": "La Tribune de l'Aube : journal républicain indépendant",
+      "pr_modify_time": "2023-05-23T23:12:01.000Z",
+      "lom_3_4_language": null,
+      "lom_5_13_credit": null,
+      "parene_resource_id": 7005998,
+      "lom_1_3_language": "[\"fra\"]",
+      "lom_2_3_contribute": [
+        {
+          "label": "éditeur de publication",
+          "entity": "BEGIN:VCARD\nFN:[s.n.] (Troyes)\nEND:VCARD",
+          "source": "oai_dc",
+          "value": "éditeur de publication",
+          "entityName": "[s.n.] (Troyes)"
+        }
+      ],
+      "lom_4_3_location": null,
+      "lom_3_1_identifier": null,
+      "lom_4_6_otherplatformrequirements": null,
+      "lom_4_7_duration": null,
+      "lom_6_1_cost": null,
+      "lom_1_1_identifier": "[{\"entry\": \"http://gallica.bnf.fr/ark:/12148/bpt6k28177376\", \"catalog\": \"URI\"}]",
+      "lom_1_8_aggregationlevel": null,
+      "lom_5_8_difficulty": null,
+      "lom_9_classification": null,
+      "pr_resource_editor": "[s.n.] (Troyes)",
+      "lom_5_2_learningresourcetype": null,
+      "lom_1_2_title": [
+        {
+          "text": "La Tribune de l'Aube : journal républicain indépendant",
+          "lang": null
+        }
+      ],
+      "lom_1_4_description": [
+        {
+          "text": "01 août 1912",
+          "lang": null
+        },
+        {
+          "text": "1912/08/01 (A12,N6040).",
+          "lang": null
+        }
+      ],
+      "@timestamp": "2023-11-28T15:12:51.741028058Z",
+      "lom_5_16_tool": null,
+      "lom_5_1_activitetype": null,
+      "pr_identifier": "oai:bnf.fr:gallica/ark:/12148/bpt6k28177376",
+      "pr_resource_keyword": null,
+      "lom_4_2_size": null,
+      "lom_6_2_copyrightandotherrestrictions": null,
+      "lom_6_3_description": "[{\"lang\": \"fra\", \"text\": \"conditions spécifiques d'utilisation - BnF-partenariats, Presse Ancienne RetroNews\"}, {\"lang\": \"eng\", \"text\": \"restricted use\"}]",
+      "pr_abonnement": null,
+      "lom_2_2_status": null,
+      "pr_resource_title": "La Tribune de l'Aube : journal républicain indépendant",
+      "lom_1_7_structure": null,
+      "parene_resource_lom_id": 7005998,
+      "lom_5_6_context": null,
+      "lom_5_11_language": null
+    },
+    "fields": {
+      "lom_2_3_contribute.entityName": [
+        "[s.n.] (Troyes)"
+      ],
+      "pr_resource_title": [
+        "La Tribune de l'Aube : journal républicain indépendant"
+      ],
+      "pr_resource_author": [
+        ""
+      ],
+      "lom_2_3_contribute.label": [
+        "éditeur de publication"
+      ],
+      "lom_1_4_description.text.keyword": [
+        "01 août 1912",
+        "1912/08/01 (A12,N6040)."
+      ],
+      "lom_2_3_contribute.source": [
+        "oai_dc"
+      ],
+      "pr_source": [
+        "gallica"
+      ],
+      "pr_source.keyword": [
+        "gallica"
+      ],
+      "pr_identifier": [
+        "oai:bnf.fr:gallica/ark:/12148/bpt6k28177376"
+      ],
+      "lom_2_3_contribute.source.keyword": [
+        "oai_dc"
+      ],
+      "pr_resource_type.keyword": [
+        "Texte"
+      ],
+      "lom_1_9_documenttype.label": [
+        "texte",
+        "text",
+        "publication en série imprimée",
+        "printed serial"
+      ],
+      "lom_6_3_description.keyword": [
+        "[{\"lang\": \"fra\", \"text\": \"conditions spécifiques d'utilisation - BnF-partenariats, Presse Ancienne RetroNews\"}, {\"lang\": \"eng\", \"text\": \"restricted use\"}]"
+      ],
+      "lom_2_3_contribute.entity": [
+        "BEGIN:VCARD\nFN:[s.n.] (Troyes)\nEND:VCARD"
+      ],
+      "lom_7_relation": [
+        "[{\"kind\": {\"label\": \"a pour vignette\", \"value\": \"a pour vignette\", \"source\": \"SCOLOMFRv2.1\"}, \"resource\": {\"identifier\": [{\"entry\": \"http://gallica.bnf.fr/ark:/12148/bpt6k28177376/medres.jpg\", \"catalog\": \"URI\"}]}}]"
+      ],
+      "lom_6_3_description": [
+        "[{\"lang\": \"fra\", \"text\": \"conditions spécifiques d'utilisation - BnF-partenariats, Presse Ancienne RetroNews\"}, {\"lang\": \"eng\", \"text\": \"restricted use\"}]"
+      ],
+      "lom_1_9_documenttype.value.keyword": [
+        "Texte",
+        "Texte",
+        "Texte",
+        "Texte"
+      ],
+      "parene_resource_lom_id": [
+        7005998
+      ],
+      "lom_1_9_documenttype.value": [
+        "Texte",
+        "Texte",
+        "Texte",
+        "Texte"
+      ],
+      "lom_7_relation.keyword": [
+        "[{\"kind\": {\"label\": \"a pour vignette\", \"value\": \"a pour vignette\", \"source\": \"SCOLOMFRv2.1\"}, \"resource\": {\"identifier\": [{\"entry\": \"http://gallica.bnf.fr/ark:/12148/bpt6k28177376/medres.jpg\", \"catalog\": \"URI\"}]}}]"
+      ],
+      "lom_1_1_identifier.keyword": [
+        "[{\"entry\": \"http://gallica.bnf.fr/ark:/12148/bpt6k28177376\", \"catalog\": \"URI\"}]"
+      ],
+      "lom_1_9_documenttype.label.keyword": [
+        "texte",
+        "text",
+        "publication en série imprimée",
+        "printed serial"
+      ],
+      "lom_2_3_contribute.value": [
+        "éditeur de publication"
+      ],
+      "lom_2_3_contribute.entity.keyword": [
+        "BEGIN:VCARD\nFN:[s.n.] (Troyes)\nEND:VCARD"
+      ],
+      "lom_1_4_description.text": [
+        "01 août 1912",
+        "1912/08/01 (A12,N6040)."
+      ],
+      "lom_1_9_documenttype.source.keyword": [
+        "oai_dc",
+        "oai_dc",
+        "oai_dc",
+        "oai_dc"
+      ],
+      "lom_1_3_language.keyword": [
+        "[\"fra\"]"
+      ],
+      "pr_resource_title_text": [
+        "La Tribune de l'Aube : journal républicain indépendant"
+      ],
+      "lom_1_2_title.text": [
+        "La Tribune de l'Aube : journal républicain indépendant"
+      ],
+      "pr_resource_language.keyword": [
+        "fra"
+      ],
+      "lom_2_3_contribute.value.keyword": [
+        "éditeur de publication"
+      ],
+      "pr_identifier.keyword": [
+        "oai:bnf.fr:gallica/ark:/12148/bpt6k28177376"
+      ],
+      "pr_resource_author.keyword": [
+        ""
+      ],
+      "pr_resource_title.keyword": [
+        "La Tribune de l'Aube : journal républicain indépendant"
+      ],
+      "lom_1_1_identifier": [
+        "[{\"entry\": \"http://gallica.bnf.fr/ark:/12148/bpt6k28177376\", \"catalog\": \"URI\"}]"
+      ],
+      "pr_resource_language": [
+        "fra"
+      ],
+      "lom_2_3_contribute.entityName.keyword": [
+        "[s.n.] (Troyes)"
+      ],
+      "pr_resource_editor.keyword": [
+        "[s.n.] (Troyes)"
+      ],
+      "@timestamp": [
+        "2023-11-28T15:12:51.741Z"
+      ],
+      "lom_2_3_contribute.label.keyword": [
+        "éditeur de publication"
+      ],
+      "lom_1_3_language": [
+        "[\"fra\"]"
+      ],
+      "lom_1_9_documenttype.source": [
+        "oai_dc",
+        "oai_dc",
+        "oai_dc",
+        "oai_dc"
+      ],
+      "pr_resource_editor": [
+        "[s.n.] (Troyes)"
+      ],
+      "pr_modify_time": [
+        "2023-05-23T23:12:01.000Z"
+      ],
+      "pr_resource_type": [
+        "Texte"
+      ],
+      "lom_1_2_title.text.keyword": [
+        "La Tribune de l'Aube : journal républicain indépendant"
+      ],
+      "parene_resource_id": [
+        7005998
+      ],
+      "pr_resource_title_text.keyword": [
+        "La Tribune de l'Aube : journal républicain indépendant"
+      ]
+    }
+  }

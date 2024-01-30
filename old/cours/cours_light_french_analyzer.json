@@ -1,0 +1,620 @@
+{
+    "settings": {
+        "analysis": {
+            "filter": {
+                "synonym_filter": {
+                    "type": "synonym_graph",
+                    "synonyms_path": "analysis/fra_synonyms_solr_format.txt",
+                    "lenient": true
+                },
+                "french_elision": {
+                    "type": "elision",
+                    "articles_case": true,
+                    "articles": [
+                        "l",
+                        "m",
+                        "t",
+                        "qu",
+                        "n",
+                        "s",
+                        "j",
+                        "d",
+                        "c",
+                        "jusqu",
+                        "quoiqu",
+                        "lorsqu",
+                        "puisqu"
+                    ]
+                },
+                "french_stop": {
+                    "type": "stop",
+                    "stopwords": [
+                        "_french_",
+                        "cours",
+                        "cour"
+                    ]
+                },
+                "french_keywords": {
+                    "type": "keyword_marker",
+                    "keywords": []
+                },
+                "french_stemmer": {
+                    "type": "stemmer",
+                    "language": "light_french"
+                },
+                "syn_multiplexer": {
+                    "type": "multiplexer",
+                    "filters": [
+                        "french_elision, lowercase, synonym_filter, french_stop, french_stemmer",
+                        "french_elision, lowercase, french_stop, french_keywords ,french_stemmer"
+                    ],
+                    "preserve_original": false
+                }
+            },
+            "analyzer": {
+                "fr_tokenizer": {
+                    "tokenizer": "standard",
+                    "filter": [
+                        "french_elision",
+                        "lowercase",
+                        "french_stop",
+                        "french_keywords",
+                        "french_stemmer"
+                    ],
+                    "char_filter": [
+                        "html_strip"
+                    ]
+                },
+                "fr_search_tokenizer": {
+                    "tokenizer": "whitespace",
+                    "filter": [
+                        "syn_multiplexer"
+                    ]
+                }
+            }
+        }
+    },
+    "mappings": {
+        "dynamic": "strict",
+        "properties": {
+            "cdm_cours_1_id": {
+                "type": "keyword"
+            },
+            "cdm_cours_10_1_admissiondescription": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_10_2_placesavailable": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_10_3_1_deadlineregistration": {
+                "type": "date"
+            },
+            "cdm_cours_10_3_2_deadlinecancel": {
+                "type": "date"
+            },
+            "cdm_cours_11_prerequisites": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text",
+                        "analyzer": "fr_tokenizer"
+                    }
+                }
+            },
+            "cdm_cours_12_1_1_teachingplaceaddress": {
+                "type": "text"
+            },
+            "cdm_cours_12_1_2_teachingplaceroom": {
+                "type": "text"
+            },
+            "cdm_cours_12_1_3_teachingplacebuilding": {
+                "type": "keyword"
+            },
+            "cdm_cours_12_2_teachingonline": {
+                "type": "keyword"
+            },
+            "cdm_cours_13_targetgroup": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_14_formofteaching": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "orgOfTeaching": {
+                        "type": "text"
+                    },
+                    "methodOfTeaching": {
+                        "type": "text"
+                    },
+                    "formatOfTeaching": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_15_formofassess": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_16_instructionlanguage": {
+                "type": "keyword"
+            },
+            "cdm_cours_17_overlap": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text",
+                        "analyzer": "fr_tokenizer"
+                    }
+                }
+            },
+            "cdm_cours_18_syllabus": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_19_1_blockexpensesinfo": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_19_2_expensesprice": {
+                "properties": {
+                    "price": {
+                        "type": "text",
+                        "fields":{
+                            "keyword":{
+                                "type":"keyword"
+                            }
+                        }
+                    },
+                    "currency": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_20_universaladjustment": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_21_10_examcontacts": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            },
+            "cdm_cours_21_1_examname": {
+                "type": "text"
+            },
+            "cdm_cours_21_2_1_examkind": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_21_2_2_examform": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_21_3_examregistrationdeadline": {
+                "type": "date"
+            },
+            "cdm_cours_21_4_examcanceldeadline": {
+                "type": "date"
+            },
+            "cdm_cours_21_5_examevaluationdeadline": {
+                "type": "date"
+            },
+            "cdm_cours_21_6_examstart": {
+                "type": "date"
+            },
+            "cdm_cours_21_7_examend": {
+                "type": "date"
+            },
+            "cdm_cours_21_8_examduration": {
+                "type": "text"
+            },
+            "cdm_cours_21_9_1_examaddress": {
+                "type": "text"
+            },
+            "cdm_cours_21_9_2_examonline": {
+                "type": "keyword"
+            },
+            "cdm_cours_22_1_1_contactname": {
+                "type": "text"
+            },
+            "cdm_cours_22_1_2_address": {
+                "type": "text"
+            },
+            "cdm_cours_22_1_3_city": {
+                "type": "keyword",
+                "fields": {
+                    "completion": {
+                        "type": "completion"
+                    }
+                }
+            },
+            "cdm_cours_22_1_4_country": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "cdm_cours_22_1_5_voice": {
+                "properties": {
+                    "teltype": {
+                        "type": "keyword"
+                    },
+                    "numero": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "cdm_cours_22_1_6_emails": {
+                "type": "keyword"
+            },
+            "cdm_cours_22_1_7_sociallink": {
+                "properties": {
+                    "link": {
+                        "type": "keyword"
+                    },
+                    "linktype": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "cdm_cours_22_2_person": {
+                "properties": {
+                    "nomResponsable": {
+                        "type": "text"
+                    },
+                    "urlLinkPersonne": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_26_searchword": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword"
+                            },
+                            "completion": {
+                                "type": "completion"
+                            }
+                        }
+                    }
+                }
+            },
+            "cdm_cours_27_bis_icon": {
+                "type": "keyword"
+            },
+            "cdm_cours_27_urlimagecourse": {
+                "type": "keyword"
+            },
+            "cdm_cours_28_imagegalery": {
+                "type": "keyword"
+            },
+            "cdm_cours_29_1_idprovider": {
+                "type": "long"
+            },
+            "cdm_cours_29_2_nameprovider": {
+                "type": "text"
+            },
+            "cdm_cours_29_3_linkprovider": {
+                "type": "keyword"
+            },
+            "cdm_cours_29_4_logoprovider": {
+                "type": "keyword"
+            },
+            "cdm_cours_2_title": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "analyzer": "fr_tokenizer",
+                        "fields": {
+                            "keyword":{
+                                "type":"keyword"
+                            },
+                            "completion": {
+                                "type": "completion"
+                            }
+                        }
+                    }
+                }
+            },
+            "cdm_cours_3_1_webpagelink": {
+                "type": "keyword"
+            },
+            "cdm_cours_3_2_videolink": {
+                "type": "keyword"
+            },
+            "cdm_cours_4_resume": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "analyzer": "fr_tokenizer"
+                    }
+                }
+            },
+            "cdm_cours_5_description": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "text",
+                        "analyzer": "fr_tokenizer"
+                    }
+                }
+            },
+            "cdm_cours_6_1_countryname": {
+                "type": "keyword"
+            },
+            "cdm_cours_6_2_level": {
+                "properties": {
+                    "lang": {
+                        "type": "keyword"
+                    },
+                    "text": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "cdm_cours_6_3_competenceyielding": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_6_4_aknowledgement": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_7_1_1_start": {
+                "type": "date"
+            },
+            "cdm_cours_7_1_2_end": {
+                "type": "date"
+            },
+            "cdm_cours_7_2_teachingtermperiod": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_7_3_teachingstudypace": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_7_4_teachingtimeofday": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_7_5_duration": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_7_6_effort": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_7_7_rhythm": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_7_8_othersession": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_8_1_blockcreditsinfo": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_8_2_ectscredits": {
+                "type": "text"
+            },
+            "cdm_cours_8_3_hoursperweek": {
+                "type": "text"
+            },
+            "cdm_cours_9_learningobjectives": {
+                "properties": {
+                    "lang": {
+                        "type": "text"
+                    },
+                    "text": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_a_formation": {
+                "type": "keyword"
+            },
+            "cdm_cours_a_orgunit": {
+                "properties": {
+                    "id_parene": {
+                        "type": "keyword"
+                    },
+                    "id_provider": {
+                        "type": "keyword"
+                    },
+                    "nom_orgunit": {
+                        "type": "keyword"
+                    },
+                    "link_orgunit": {
+                        "type": "text"
+                    }
+                }
+            },
+            "cdm_cours_a_personne": {
+                "properties": {
+                    "id_parene": {
+                        "type": "keyword"
+                    },
+                    "id_provider": {
+                        "type": "keyword"
+                    },
+                    "nom_personne": {
+                        "type": "text"
+                    },
+                    "link_personne": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "cdm_cours_statut": {
+                "type": "keyword"
+            },
+            "post_id": {
+                "type": "long"
+            },
+            "pr_insert_time": {
+                "type": "date"
+            },
+            "pr_modify_time": {
+                "type": "date"
+            },
+            "pr_regular_price": {
+                "type": "double"
+            },
+            "pr_sale_price": {
+                "type": "double"
+            },
+            "pr_sold_individually": {
+                "type": "text"
+            }
+        }
+    }
+}

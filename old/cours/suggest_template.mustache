@@ -1,0 +1,17 @@
+{
+    "script": {
+        "lang": "mustache",
+        "source": """
+        {
+            "suggest": {
+                "auto_comp_suggest": {
+                    "prefix": "{{input}}",
+                    "completion": {
+                        "field": "{{field}}"
+                    }
+                }
+            },
+            "_source": ["suggest"]
+        }"""        
+    }
+}

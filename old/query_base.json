@@ -1,0 +1,16 @@
+{
+    "query": {
+        "bool": {
+            "must": {
+                "match": {
+                    "cdm_cours_5_description.text": {
+                        "query": "query_string",
+                        "fuzziness": "AUTO"
+                    }
+                }
+            }
+        },
+        "from": 0,
+        "size": 5
+    }
+}

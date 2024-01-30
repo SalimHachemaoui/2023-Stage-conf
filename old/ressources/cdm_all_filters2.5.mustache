@@ -1,0 +1,82 @@
+{
+    "script": {
+        "lang": "mustache",
+        "source": """
+        {
+            "query": {
+                "bool": {
+                    "should": [
+                        {{#source}}
+                        {"term":{"lom_1_9_documenttype.source.keyword":"{{source}}"}},
+                        {{/source}}
+                        {{#type}}
+                        {"term":{"lom_1_9_documenttype.value.keyword":"{{type}}"}},
+                        {{/type}}
+                        {{#langue}}
+                        {"term":{"lom_1_3_language":"{{langue}}"}},
+                        {{/langue}}
+                        {{#level}}
+                        {"term":{"lom_5_3_interactivitelevel":"{{level}}"}},
+                        {{/level}}
+
+
+                        
+                        {"range": {
+                            "lom_6_1_cost":{
+                                "gte":"{{min_price}}{{^min_price}}0{{/min_price}}",
+                                "lte":"{{max_price}}{{^max_price}}1000{{/max_price}}"
+                        }}}
+                    ],
+                    "must": [
+                        {{#query_string}}
+                        {"multi_match":{
+                            "query":"{{query_string}}",
+                            "analyzer": "fr_search_tokenizer",
+                            "type": "most_fields",
+                            "fuzziness": "AUTO",
+                            "minimum_should_match": "90%",
+                            "operator": "AND",
+                            //"lenient": true,
+                            "fields": [
+                                "lom_1_2_title.text^2",
+                                "lom_1_5_keyword.text^4",
+                                "lom_1_4_description.text"
+                            ]
+                        }},{{/query_string}}
+
+                        {{#title}}
+                        {"match":{"lom_1_2_title.text":"{{title}}"}},
+                        {{/title}}
+
+                        {{#keyword}}
+                        {"match":{"lom_1_5_keyword.text":"{{keyword}}"}},
+                        {{/keyword}}
+                   
+                        {"match_all": {}}
+                    ],
+                    "minimum_should_match" : "{{minimum_should_match}}{{^minimum_should_match}}100{{/minimum_should_match}}%"
+                }},
+            {{#sort_field}}
+            "sort": [
+                {"{{sort_field}}": {"order": "{{order}}{{^order}}asc{{/order}}"}}
+            ],
+            {{/sort_field}}
+            "from": "{{min}}{{^min}}0{{/min}}"
+            {{^aggregate_field}},
+            "size": "{{size}}{{^size}}5{{/size}}"
+            {{/aggregate_field}}
+            {{#aggregate_field}},
+            "_source":  ["{{aggregate_field}}"],
+            "size": 0,
+            "aggs": {
+              "values": {
+                "terms" : {
+                  "field": "{{aggregate_field}}"
+                }
+              }
+            }
+            {{/aggregate_field}}
+
+        }"""        
+    }
+}
